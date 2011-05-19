@@ -40,14 +40,14 @@ module SpecificAssets
 
   module ClassMethods
     
-    def add_js(asset_name)
-      js_specific = [] if js_specific.nil?
-      js_specific = js_specific + [asset_name]
+    def add_js(*asset_name)
+      self.js_specific = [] if js_specific.nil?
+      self.js_specific = js_specific + asset_name
     end
 
-    def add_css(asset_name)
+    def add_css(*asset_name)
       self.css_specific = [] if self.css_specific.nil?
-      self.css_specific = self.css_specific + [asset_name]
+      self.css_specific = self.css_specific + asset_name
     end
 
   end
