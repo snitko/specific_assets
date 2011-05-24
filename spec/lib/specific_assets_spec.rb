@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 end
 
 class SomeController < ApplicationController
+  add_css "yo"
   def hello
     add_js  "hello", "hi"
     add_css "hello", "hi"
@@ -23,6 +24,7 @@ describe SomeController, :type => :controller do
     get :hello
     @controller.css_assets.should include("hello")
     @controller.css_assets.should include("hi")
+    @controller.css_assets.should include("yo")
     @controller.js_assets.should  include("hello")
     @controller.js_assets.should  include("hi")
   end

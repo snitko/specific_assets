@@ -14,7 +14,7 @@ module SpecificAssets
     #   js_assets.each { |js| javascript_include_tag(js) }
     def js_assets
       unless self.class.js_specific.nil?
-        (self.class.js_specific + @js_specific).uniq
+        (filter_class_assets("js") + @js_specific).uniq
       else
         @js_specific
       end
@@ -24,7 +24,7 @@ module SpecificAssets
     #   css_assets.each { |css| stylesheet_link_tag(css) }
     def css_assets
       unless self.class.css_specific.nil?
-        (self.class.css_specific + @css_specific).uniq
+        (filter_class_assets("css") + @css_specific).uniq
       else
         @css_specific
       end
@@ -35,20 +35,38 @@ module SpecificAssets
       @css_specific ||= []
     end
 
+    private
+      
+      # Because assets end up being collected in a class variable
+      # assets from other controllers usually end up in the controller
+      # that has nothing to do with them. This method filters assets
+      # and returns the ones which are relevant to the current controller.
+      def filter_class_assets(asset_type)
+        self.class.send("#{asset_type}_specific").map { |a| a[:controller] == self.class.to_s ? a[:asset] : nil }.compact
+      end
 
   end
 
   module ClassMethods
     
-    def add_js(*asset_name)
+    def add_js(*assets)
       self.js_specific = [] if js_specific.nil?
-      self.js_specific = js_specific + asset_name
+      # Storing current controller name in the key
+      asset_name.map! { |a| { :controller => self.to_s, :asset => a } }
+      self.js_specific = js_specific + label_assets_with_controller_name(assets)
     end
 
-    def add_css(*asset_name)
+    def add_css(*assets)
       self.css_specific = [] if self.css_specific.nil?
-      self.css_specific = self.css_specific + asset_name
+      # Storing current controller name in the key
+      self.css_specific = self.css_specific + label_assets_with_controller_name(assets)
     end
+
+    private
+
+      def label_assets_with_controller_name(assets)
+        assets.map! { |a| { :controller => self.to_s, :asset => a } }
+      end
 
   end
 
