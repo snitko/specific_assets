@@ -52,7 +52,6 @@ module SpecificAssets
     def add_js(*assets)
       self.js_specific = [] if js_specific.nil?
       # Storing current controller name in the key
-      asset_name.map! { |a| { :controller => self.to_s, :asset => a } }
       self.js_specific = js_specific + label_assets_with_controller_name(assets)
     end
 
