@@ -17,30 +17,13 @@ Jeweler::Tasks.new do |gem|
   gem.name = "specific_assets"
   gem.homepage = "http://github.com/snitko/specific_assets"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = "Easily add css and js assets in controllers and views"
+  gem.description = "Adds a couple of class and instance methods to controllers and views that help you load assets"
   gem.email = "roman.snitko@gmail.com"
   gem.authors = ["Roman Snitko"]
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
-
-require 'rake/testtask'
-Rake::TestTask.new(:test) do |test|
-  test.libs << 'lib' << 'test'
-  test.pattern = 'test/**/test_*.rb'
-  test.verbose = true
-end
-
-require 'rcov/rcovtask'
-Rcov::RcovTask.new do |test|
-  test.libs << 'test'
-  test.pattern = 'test/**/test_*.rb'
-  test.verbose = true
-  test.rcov_opts << '--exclude "gems/*"'
-end
-
-task :default => :test
 
 require 'rdoc/task'
 Rake::RDocTask.new do |rdoc|
