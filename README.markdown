@@ -14,7 +14,6 @@ Now you can just say:
     add_js "registration"
 
 and you'll get respective css and js files included into the page.
-	
 
 INSTALLATION
 ------------
