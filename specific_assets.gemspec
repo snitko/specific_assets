@@ -14,8 +14,7 @@ Gem::Specification.new do |s|
   s.email = "roman.snitko@gmail.com"
   s.extra_rdoc_files = [
     "LICENSE.txt",
-    "README.markdown",
-    "README.rdoc"
+    "README.markdown"
   ]
   s.files = [
     ".document",
@@ -24,7 +23,6 @@ Gem::Specification.new do |s|
     "LICENSE.txt",
     "MIT-LICENSE",
     "README.markdown",
-    "README.rdoc",
     "Rakefile",
     "VERSION",
     "lib/specific_assets.rb",
